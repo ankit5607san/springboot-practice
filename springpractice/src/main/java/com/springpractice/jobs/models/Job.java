@@ -1,5 +1,6 @@
 package com.springpractice.jobs.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springpractice.companies.models.Company;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

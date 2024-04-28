@@ -1,5 +1,7 @@
 package com.springpractice.jobs.services.impl;
 
+import com.springpractice.companies.models.Company;
+import com.springpractice.companies.repositories.CompanyRepository;
 import com.springpractice.jobs.models.Job;
 import com.springpractice.jobs.repositories.JobRepository;
 import com.springpractice.jobs.services.JobService;
@@ -11,11 +13,14 @@ import java.util.Optional;
 @Service
 public class JobServiceImpl implements JobService
 {
-    private JobRepository jobRepository;
+    private final JobRepository jobRepository;
 
-    public JobServiceImpl(JobRepository jobRepository)
+    private final CompanyRepository companyRepository;
+
+    public JobServiceImpl(JobRepository jobRepository, CompanyRepository companyRepository)
     {
         this.jobRepository = jobRepository;
+        this.companyRepository = companyRepository;
     }
 
     @Override
@@ -28,6 +33,24 @@ public class JobServiceImpl implements JobService
     public void createJob(Job job)
     {
         jobRepository.save(job);
+
+        Company company = job.getCompany();
+
+        if (company != null && company.getId() != null)
+        {
+            Optional<Company> dbCompany = companyRepository.findById(company.getId());
+
+            if (dbCompany.isPresent())
+            {
+                dbCompany.get().getJobs().add(job);
+
+                companyRepository.save(dbCompany.get());
+            }
+        }
+        else
+        {
+            System.out.println("company not found");
+        }
     }
 
     @Override

@@ -1,35 +1,29 @@
-package com.springpractice.companies.models;
+package com.springpractice.reviews.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.springpractice.jobs.models.Job;
-import com.springpractice.reviews.models.Review;
+import com.springpractice.companies.models.Company;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tbl_company")
-public class Company
+@Table(name = "tbl_review")
+public class Review
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String title;
     private String description;
+    private Float rating;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "company")
-    private List<Job> jobs;
-
-    @OneToMany(mappedBy = "company")
-    private List<Review> reviews;
+    @ManyToOne
+    private Company company;
 }
-
