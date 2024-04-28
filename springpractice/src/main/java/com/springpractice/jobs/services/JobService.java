@@ -1,6 +1,6 @@
-package com.springpractice.services;
+package com.springpractice.jobs.services;
 
-import com.springpractice.models.Job;
+import com.springpractice.jobs.models.Job;
 
 import java.util.List;
 import java.util.Optional;

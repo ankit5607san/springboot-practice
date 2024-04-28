@@ -1,7 +1,8 @@
-package com.springpractice.controllers;
+package com.springpractice.jobs.controllers;
 
-import com.springpractice.models.Job;
-import com.springpractice.services.JobService;
+
+import com.springpractice.jobs.models.Job;
+import com.springpractice.jobs.services.JobService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/jobs")
 public class JobController
 {
     private final JobService jobService;
@@ -19,13 +21,13 @@ public class JobController
         this.jobService = jobService;
     }
 
-    @GetMapping("/jobs")
+    @GetMapping
     public ResponseEntity<List<Job>> getJobs()
     {
         return ResponseEntity.ok(jobService.getAll());
     }
 
-    @PostMapping("/jobs/create")
+    @PostMapping("/create")
     public ResponseEntity<String> createJob(@RequestBody Job job)
     {
         jobService.createJob(job);
@@ -33,7 +35,7 @@ public class JobController
         return ResponseEntity.ok("job added successfully");
     }
 
-    @GetMapping("/jobs/{jobId}")
+    @GetMapping("/{jobId}")
     public ResponseEntity<Job> getJobById(@PathVariable Long jobId)
     {
         Optional<Job> optionalJob = jobService.getById(jobId);
@@ -41,7 +43,7 @@ public class JobController
         return optionalJob.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
-    @DeleteMapping("/jobs/{jobId}")
+    @DeleteMapping("/{jobId}")
     public ResponseEntity<String> deleteById(@PathVariable long jobId)
     {
         if (jobService.deleteById(jobId))
@@ -53,7 +55,7 @@ public class JobController
 
     }
 
-    @PutMapping("/jobs/{jobId}")
+    @PutMapping("/{jobId}")
     public ResponseEntity<String> updateJob(@RequestBody Job job, @PathVariable long jobId)
     {
         if (jobService.update(job, jobId))
