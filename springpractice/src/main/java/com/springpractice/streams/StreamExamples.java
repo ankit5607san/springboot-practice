@@ -77,6 +77,19 @@ public class StreamExamples
 
         System.out.println(sorting.stream().sorted((o1, o2) -> o1.length() < o2.length() ? -1 : o1.length() > o2.length() ? 1 : o1.compareTo(o2)).toList());
 
+        // sort based on last number from digits into ascending order
+        //29,48,63,55,81,93,87,72
+
+        List<Integer> list = List.of(29,48,63,55,81,93,87,72);
+
+        System.out.println(list.stream().sorted((o1,o2) ->
+        {
+            Integer a = o1 % 10;
+            Integer b = o2 % 10;
+            return a.compareTo(b);
+        }).collect(Collectors.toList()));
+
+
 
     }
 }
