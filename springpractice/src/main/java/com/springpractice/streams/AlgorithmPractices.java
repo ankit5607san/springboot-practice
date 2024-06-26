@@ -13,6 +13,43 @@ public class AlgorithmPractices
         /*List<Integer> runs = List.of(1, 4, 4, 4, 5, 3);
 
         System.out.println(migratoryBirds(runs));*/
+
+        /*
+        List<Integer> prices = List.of(3, 10, 2, 9);
+
+        int k = 1; // index not ate item
+
+        int contribution = 12; // contributed by anna
+
+        * */
+    }
+
+    public static void bonAppetit(List<Integer> bill, int k, int b)
+    {
+        /*int sum = bill.stream().filter(value -> !Objects.equals(value, bill.get(k))).mapToInt(Integer::intValue).sum();
+
+        int result = b - (sum/2);*/
+
+        int summation = 0;
+
+        for (int index = 0; index < bill.size(); index++)
+        {
+            if (index != k)
+            {
+                summation += bill.get(index);
+            }
+        }
+
+        int result = b - (summation / 2);
+
+        if (result == 0)
+        {
+            System.out.println("Bon Appetit");
+        }
+        else
+        {
+            System.out.println(result);
+        }
     }
 
     public static int migratoryBirds(List<Integer> arr)
