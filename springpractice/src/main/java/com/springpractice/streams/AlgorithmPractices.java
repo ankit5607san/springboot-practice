@@ -22,6 +22,12 @@ public class AlgorithmPractices
         int contribution = 12; // contributed by anna
 
         * */
+
+        /*
+        countApplesAndOranges(7, 10, 4, 12, List.of(2, 3, -4), List.of(2, -2, -4));
+        * */
+
+
     }
 
     public static void bonAppetit(List<Integer> bill, int k, int b)
@@ -113,5 +119,41 @@ public class AlgorithmPractices
         }
 
         return counter;
+    }
+
+    public static void countApplesAndOranges(int s, int t, int a, int o, List<Integer> apples, List<Integer> oranges)
+    {
+
+        long counter = 0;
+
+        for (Integer apple : apples)
+        {
+            if ((apple + a) >= s && (apple + a) <= t)
+            {
+                ++counter;
+            }
+        }
+
+        System.out.println(counter);
+
+        counter = 0;
+
+        for (Integer orange : oranges)
+        {
+            if ((orange + o) <= t && (orange + o) >= s)
+            {
+                ++counter;
+            }
+        }
+
+        System.out.println(counter);
+        /*
+        long appleCounter = apples.stream().filter(apple -> (a + apple) >= s && (a+apple) <= t).count();
+
+        System.out.println(appleCounter);
+
+        long orangeCounter = oranges.stream().filter(orange -> (o + orange) >= a && (o+orange) <= t).count();
+
+        System.out.println(orangeCounter);*/
     }
 }
