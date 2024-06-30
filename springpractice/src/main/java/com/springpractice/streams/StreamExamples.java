@@ -1,6 +1,7 @@
 package com.springpractice.streams;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.Map.Entry.comparingByValue;
@@ -90,6 +91,20 @@ public class StreamExamples
         }).collect(Collectors.toList()));
 
 
+        //find first non-repeating character from string
+        String s1 = "Hello, Welcome to the Java World ";
+
+        String s = s1.toLowerCase().chars().mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(characterLongEntry ->
+                        characterLongEntry.getKey() >= 'a'
+                                && characterLongEntry.getKey() <= 'z'
+                                && characterLongEntry.getValue() == 1)
+                .map(Map.Entry::getKey).findFirst().toString();
+
+        System.out.println(s);
 
     }
 }
