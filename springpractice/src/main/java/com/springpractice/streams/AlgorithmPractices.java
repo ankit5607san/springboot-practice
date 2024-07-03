@@ -27,7 +27,30 @@ public class AlgorithmPractices
         countApplesAndOranges(7, 10, 4, 12, List.of(2, 3, -4), List.of(2, -2, -4));
         * */
 
+        // write program to find no of 'a' from given string repeating upto defined n number
+        /*System.out.println(repeatedString("kmretasscityylpdhuwjirnqimlkcgxubxmsxpypgzxtenweirknjtasxtvxemtwxuarabssvqdnktqadhyktagjxoanknhgilnm", 23405L));*/
 
+    }
+
+    public static long repeatedString(String s, Long n)
+    {
+        // Handle base cases
+        if (s.length() == 1)
+        {
+            return s.charAt(0) == 'a' ? n : 0;
+        }
+
+        // Count 'a' occurrences in the original string
+        long aCountInS = s.chars().filter(c -> c == 'a').count();
+
+        // Calculate repetitions of the entire string
+        long repetitions = n / s.length();
+
+        // Calculate remaining length after repetitions
+        long remaining = n % s.length();
+
+        // Total count = 'a' in repetitions * count in string + 'a' in remaining substring
+        return repetitions * aCountInS + s.chars().limit((int) remaining).filter(c -> c == 'a').count();
     }
 
     public static void bonAppetit(List<Integer> bill, int k, int b)
